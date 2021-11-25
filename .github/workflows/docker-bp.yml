@@ -13,6 +13,10 @@ on:
         required: true
       DOCKERHUB_PASSWORD:
         required: true
+      IMAGE_NAME:
+        required: true
+      IMAGE_TAG:
+        required: true
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -49,7 +53,7 @@ jobs:
           context: .
           # Note: tags has to be all lower-case
           tags: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/demo:latest
+            ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.IMAGE_NAME }}:${{ secrets.IMAGE_TAG }}
           # build on feature branches, push only on main branch
           push: ${{ github.ref == 'refs/heads/main' }}
       - name: Image digest
